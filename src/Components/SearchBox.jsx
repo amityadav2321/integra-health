@@ -1,17 +1,17 @@
 import { useState } from "react";
+
 function SearchBox({ code, setCode, onSearch }) {
   return (
     <div>
       <label className="block mb-2 text-lg font-semibold">
-        Enter NAM Code or ICD Code
+        Enter NAM Code, ICD Code, or Ayurvedic Term
       </label>
       <input
         type="text"
         value={code}
         onChange={(e) => setCode(e.target.value)}
-        placeholder="e.g., NAM-002 or 5A11"
-        className="w-full p-2 border rounded-lg mb-4"git init
-
+        placeholder="e.g., NAM-002, 5A11, or Jwara"
+        className="w-full p-2 border rounded-lg mb-4"
       />
       <button
         onClick={onSearch}
@@ -24,4 +24,3 @@ function SearchBox({ code, setCode, onSearch }) {
 }
 
 export default SearchBox;
-

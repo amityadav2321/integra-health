@@ -82,9 +82,10 @@ function App() {
 };
 
 
- const handleSearch = () => {
+const handleSearch = () => {
   let found = null;
   const searchCode = code.trim().toUpperCase(); // normalize input
+  const searchTermLower = code.trim().toLowerCase(); // for term search
 
   // 1. Direct NAM code match
   if (mockData[searchCode]) {
@@ -100,9 +101,19 @@ function App() {
         break;
       }
     }
+
+    // 3. Search inside Ayurvedic term (like "Jwara")
+    if (!found) {
+      for (const [namCode, entry] of Object.entries(mockData)) {
+        if (entry.term.toLowerCase().includes(searchTermLower)) {
+          found = { code: namCode, ...entry };
+          break;
+        }
+      }
+    }
   }
 
-  // 3. Update state
+  // 4. Update state
   if (found) {
     setResult(found);
     setHistory((prev) => [...prev, found]);
@@ -114,6 +125,7 @@ function App() {
     });
   }
 };
+
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
